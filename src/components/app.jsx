@@ -1,27 +1,21 @@
 import React, {Component} from 'react';
-import {ThemeProvider} from '@material-ui/core/styles';
+import {Provider} from 'react-redux';
 import {Router} from 'react-router';
 import {createBrowserHistory} from 'history'
-import {connect} from 'react-redux';
 
+import Store from "../store";
 import Routes from "./routes";
-import {themeSelector} from "../reducers/themes";
 
 class App extends Component {
   render() {
-    const {theme} = this.props;
     return (
-      <ThemeProvider theme={theme}>
+      <Provider store={Store}>
         <Router history={createBrowserHistory()}>
           <Routes />
         </Router>
-      </ThemeProvider>
+      </Provider>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  theme: themeSelector(state)
-});
-
-export default connect(mapStateToProps)(App);
+export default App;
