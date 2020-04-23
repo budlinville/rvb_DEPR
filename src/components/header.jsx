@@ -10,7 +10,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import {WbSunny, NightsStay} from '@material-ui/icons';
 import {Link} from 'react-router-dom';
-import Switch from "react-switch";
+import Switch from 'react-switch';
 import {connect} from 'react-redux';
 
 import {themeSelector} from "../reducers/themes";

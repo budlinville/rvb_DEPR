@@ -1,5 +1,6 @@
 import {createMuiTheme} from '@material-ui/core/styles';
-import { TOGGLE_THEME } from "../actions/themes";
+
+import {TOGGLE_THEME} from "../actions/action-types";
 
 const themeReducer = (state={}, action) => {
   switch (action.type) {
