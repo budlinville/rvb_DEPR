@@ -1,13 +1,11 @@
 import React from 'react';
-import {Button, Typography} from '@material-ui/core';
+import {ButtonBase, Typography} from '@material-ui/core';
 
 const CustomButton = ({color, title}) => {
   const buttonHeight = window.innerHeight * 0.8;
   return (
-    <Button
-      className={"custom-button"}
-      variant="contained"
-      color={color}
+    <ButtonBase
+      className={`custom-button ${(color === "red" ? "red-button" : "blue-button")}`}
       style={{
         height: `${buttonHeight}px`,
         backgroundColor: color
@@ -16,7 +14,7 @@ const CustomButton = ({color, title}) => {
       <Typography>
         {title}
       </Typography>
-      </Button>
+    </ButtonBase>
   )
 }
 

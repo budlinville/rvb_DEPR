@@ -5,7 +5,8 @@ import {
   IconButton,
   Button,
   Menu,
-  MenuItem
+  MenuItem,
+  Grid
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import {WbSunny, NightsStay} from '@material-ui/icons';
@@ -31,10 +32,10 @@ class Header extends Component {
     const handleClose = () => {
       this.setState({anchorEl: null});
     }
-    const {children, theme, changeTheme} = this.props;
+    const {children, theme, themeName, changeTheme} = this.props;
     return (
       <div style={{margin: 0}}>
-        <AppBar position="static" style={{backgroundColor: theme.palette.background.default}}>
+        <AppBar position="static" style={{backgroundColor: (themeName === "dark") ? theme.palette.background.default : "#424242"}}>
           <Toolbar style={{justifyContent: "space-between"}}>
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleClick}>
               <MenuIcon />
@@ -48,18 +49,26 @@ class Header extends Component {
               <MenuItem component={Link} to="/stats">Nerd Stats</MenuItem>
               <MenuItem component={Link} to="/about">About</MenuItem>
               <MenuItem component={Link} to="/donate">Donate</MenuItem>
-              <span style={{justifyContent: "space-between"}}>
-                <WbSunny style={{height:12}}/>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+              >
+                <WbSunny style={{height: 20}}/>
                 <Switch
                   onChange={changeTheme}
-                  checked={theme.palette.type === "dark"}
+                  checked={themeName === "dark"}
                   checkedIcon={false}
                   uncheckedIcon={false}
-                  width={25}
-                  height={12}
+                  width={40}
+                  height={20}
+                  offColor="#ffb74d"
+                  onColor="#fff"
+                  offHandleColor="#fff"
+                  onHandleColor="#424242"
                 />
-                <NightsStay style={{height:12}}/>
-              </span>
+              <NightsStay style={{height: 20}}/>
+            </Grid>
             </Menu>
             <img src={logo} alt="" style={{maxWidth: "200px"}}/>
             <Button color="inherit">Login</Button>
@@ -72,7 +81,8 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  theme: themeSelector(state)
+  theme: themeSelector(state),
+  themeName: state.theme
 });
 
 const mapDispatchToProps = dispatch => ({

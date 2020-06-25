@@ -1,0 +1,27 @@
+.red-button {
+  background-color: red;
+  border: 5px solid #C80000 !important;
+  transition: border-width 0.2s linear !important;
+}
+
+.blue-button {
+  background-color: blue;
+  border: 5px solid #0000C8 !important;
+  transition: border-width 0.2s linear !important;
+}
+
+.red-button:hover, .blue-button:hover {
+  border-width: 10px !important;
+}
+
+.MuiButtonBase-root.custom-button {
+  width: 45%;
+  margin: 20px !important;
+  border-radius: 20px !important;
+  box-shadow: 0 6px #303030 !important;
+}
+
+.MuiButtonBase-root.custom-button:active {
+  box-shadow: 0 3px #303030 !important;
+  transform: translateY(3px) !important;
+}
