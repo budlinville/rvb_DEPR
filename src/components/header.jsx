@@ -32,50 +32,52 @@ class Header extends Component {
     const handleClose = () => {
       this.setState({anchorEl: null});
     }
-    const {children, theme, themeName, changeTheme} = this.props;
+    const {theme, themeName, changeTheme} = this.props;
     return (
-      <div style={{margin: 0}}>
-        <AppBar position="static" style={{backgroundColor: (themeName === "dark") ? theme.palette.background.default : "#424242"}}>
-          <Toolbar style={{justifyContent: "space-between"}}>
-            <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleClick}>
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              anchorEl={this.state.anchorEl}
-              open={!!this.state.anchorEl}
-              onClose={handleClose}
+      <AppBar
+        position="static"
+        style={{
+          backgroundColor: (themeName === "dark") ? theme.palette.background.default : "#424242"
+        }}
+      >
+        <Toolbar style={{justifyContent: "space-between"}}>
+          <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleClick}>
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            anchorEl={this.state.anchorEl}
+            open={!!this.state.anchorEl}
+            onClose={handleClose}
+          >
+            <MenuItem component={Link} to="/">Home</MenuItem>
+            <MenuItem component={Link} to="/stats">Nerd Stats</MenuItem>
+            <MenuItem component={Link} to="/about">About</MenuItem>
+            <MenuItem component={Link} to="/donate">Donate</MenuItem>
+            <Grid
+              container
+              direction="row"
+              justify="center"
             >
-              <MenuItem component={Link} to="/">Home</MenuItem>
-              <MenuItem component={Link} to="/stats">Nerd Stats</MenuItem>
-              <MenuItem component={Link} to="/about">About</MenuItem>
-              <MenuItem component={Link} to="/donate">Donate</MenuItem>
-              <Grid
-                container
-                direction="row"
-                justify="center"
-              >
-                <WbSunny style={{height: 20}}/>
-                <Switch
-                  onChange={changeTheme}
-                  checked={themeName === "dark"}
-                  checkedIcon={false}
-                  uncheckedIcon={false}
-                  width={40}
-                  height={20}
-                  offColor="#ffb74d"
-                  onColor="#fff"
-                  offHandleColor="#fff"
-                  onHandleColor="#424242"
-                />
-              <NightsStay style={{height: 20}}/>
-            </Grid>
-            </Menu>
-            <img src={logo} alt="" style={{maxWidth: "200px"}}/>
-            <Button color="inherit">Login</Button>
-          </Toolbar>
-        </AppBar>
-        { children }
-      </div>
+              <WbSunny style={{height: 20}}/>
+              <Switch
+                onChange={changeTheme}
+                checked={themeName === "dark"}
+                checkedIcon={false}
+                uncheckedIcon={false}
+                width={40}
+                height={20}
+                offColor="#ffb74d"
+                onColor="#fff"
+                offHandleColor="#fff"
+                onHandleColor="#424242"
+              />
+            <NightsStay style={{height: 20}}/>
+          </Grid>
+          </Menu>
+          <img src={logo} alt="" style={{maxWidth: "200px"}}/>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
     );
   }
 }

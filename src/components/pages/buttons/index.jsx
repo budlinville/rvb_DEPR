@@ -1,23 +1,23 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
-import {themeSelector} from "../../../reducers/themes"
 import Button from "./button";
 
-class Buttons extends Component {
-  render() {
-    const {theme} = this.props;
-    return(
-      <div style={{backgroundColor: theme.palette.background.paper}} >
-        <Button color="red" title="Red Team"/>
-        <Button color="blue" title="Blue Team"/>
-      </div>
-    );
-  }
+const Buttons = () => {
+  const classes = useStyles();
+  return(
+    <div className={classes.root} >
+      <Button color="red" text="Red Team"/>
+      <Button color="blue" text="Blue Team"/>
+    </div>
+  );
 }
 
-const mapStateToProps = state => ({
-  theme: themeSelector(state)
-});
+const useStyles = makeStyles(theme => ({
+	root: {
+    display: 'flex',
+    height: '80%'
+  }
+}));
 
-export default connect(mapStateToProps)(Buttons);
+export default Buttons;

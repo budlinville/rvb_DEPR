@@ -1,32 +1,40 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Switch, Route} from 'react-router';
-import {connect} from 'react-redux';
-import {ThemeProvider} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-import {themeSelector} from "../reducers/themes";
 import Header from "./header";
 import Buttons from "./pages/buttons/";
 import About from "./pages/about";
 import Stats from "./pages/stats";
 import Donate from "./pages/donate";
 
-class Routes extends Component {
-  // TODO : May move ThemeProvider to Header component...
-  render() {
-    const {theme} = this.props;
-    return (
-      <Switch>
-        <Route exact path='/' render={() => <ThemeProvider theme={theme}><Header><Buttons/></Header></ThemeProvider>}></Route>
-        <Route exact path='/stats' render={() => <ThemeProvider theme={theme}><Header><Stats/></Header></ThemeProvider>}></Route>
-        <Route exact path='/about' render={() => <ThemeProvider theme={theme}><Header><About/></Header></ThemeProvider>}></Route>
-        <Route exact path='/donate' render={() => <ThemeProvider theme={theme}><Header><Donate/></Header></ThemeProvider>}></Route>
-      </Switch>
-    );
-  }
+const Page = ({children}) => {
+  const classes = useStyles();
+  return (
+    <>
+      <Header />
+      <div className={classes.root}>
+        {children}
+      </div>
+    </>
+  )
 }
 
-const mapStateToProps = state => ({
-  theme: themeSelector(state)
-});
+const Routes = () => {
+  return (
+    <Switch>
+      <Route exact path='/' render={() => <Page><Buttons/></Page>} />
+      <Route exact path='/stats' render={() => <Page><Stats/></Page>} />
+      <Route exact path='/about' render={() => <Page><About/></Page>} />
+      <Route exact path='/donate' render={() => <Page><Donate/></Page>} />
+    </Switch>
+  );
+}
 
-export default connect(mapStateToProps)(Routes);
+const useStyles = makeStyles(theme => ({
+	root: {
+    display: 'flex'
+  }
+}));
+
+export default Routes;
