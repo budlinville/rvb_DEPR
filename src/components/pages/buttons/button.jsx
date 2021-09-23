@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button, Typography} from '@material-ui/core';
+import {ButtonBase, Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const CustomButton = ({color, text='Red'}) => {
@@ -8,41 +8,39 @@ const CustomButton = ({color, text='Red'}) => {
 
   const buttonClass = pressed ? classes.buttonPressed : classes.buttonNotPressed;
 
-  const onClickHandler = stuffz => {
-    console.log(stuffz);
-    setPressed(!pressed);
-  }
-
   return (
-    <Button
+    <ButtonBase
       className={`${classes.buttonBase} ${buttonClass}`}
       disableRipple={true}
-      onClick={onClickHandler}
-      sx={{ height: 1/4 }}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
+      onMouseLeave={() => setPressed(false)}
     >
       <Typography>
 -        {text}
 -      </Typography>
-    </Button>
+    </ButtonBase>
   )
 }
 
 const useStyles = makeStyles(theme => ({
   buttonBase: {
-    fontFamily: 'OpenSans',
+    height: 500,
+    width: 700,
+    margin: 10,
     color: '#FFFFFF',
-    backgroundColor: '#00FF7C',
-    border: '1px solid #00FF7C',
-    borderRadius: '5px',
-    boxShadow: '0px 5px 0px #00823F',
-    // position: 'relative',
-    top: 0,
+    backgroundColor: 'blue',
+    border: '5px solid yellow',
+    borderRadius: 20,
+    transition: '.1s'
   },
 	buttonNotPressed: {
-    transform: 'translateY(-6px)'
+    transform: 'translateY(0)',
+    boxShadow: '0px 5px 0px darkblue',
   },
   buttonPressed: {
-    transform: 'translateY(-2px)'
+    transform: 'translateY(8px)',
+    boxShadow: '0px 1px 0px darkblue',
   },
 	label: {
 		color: theme.palette.primary.main,
